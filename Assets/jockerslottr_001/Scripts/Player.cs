@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
     {
         for(int i = 0; i < cardHand.childCount; i++)
         {
-            cardHand.GetChild(i).RotateAround(cardHand.position, Vector3.forward, i * 6);
+            cardHand.GetChild(i).RotateAround(cardHand.position, Vector3.forward, i * 12);
         }
 
         //float step = 1;
