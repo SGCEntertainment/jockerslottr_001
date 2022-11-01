@@ -90,9 +90,6 @@ jobs:
           - Android
     steps:
     
-      - name: Create annotation for build error
-        run: base64 github/workspace/user.keystore > data.b64
-    
       - name: Checkout
         uses: actions/checkout@v2.4.2
           
