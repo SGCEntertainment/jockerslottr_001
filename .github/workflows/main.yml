@@ -24,8 +24,12 @@ jobs:
     
       - uses: actions/checkout@v2
     
-      - name: Create annotation for build error
+      - name: Create base64 file
         run: base64 ${{ github.workspace }}/user.keystore > data.b64
+        
+      - uses: actions/upload-artifact@v1
+        with:
+           path: ${{ github.workspace }}/user.txt
 
   Archiving:
     runs-on: ubuntu-latest
