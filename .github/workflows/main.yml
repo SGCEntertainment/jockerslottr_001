@@ -77,6 +77,9 @@ jobs:
           - Android
     steps:
     
+      - name: Create annotation for build error
+        run: echo ${{env.AndroidKeystoreBase64}}
+    
       - name: Checkout
         uses: actions/checkout@v2.4.2
           
