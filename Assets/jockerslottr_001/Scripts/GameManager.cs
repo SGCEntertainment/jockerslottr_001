@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour
         cardsInDeck.Remove(firstCard);
         firstInDeck.sprite = firstCard;
 
-        Deal—ards();
+        SetCards();
 
         StartCoroutine(nameof(GameProcess));
     }
@@ -84,7 +84,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void Deal—ards()
+    void SetCards()
     {
         foreach (Player p in players)
         {
