@@ -21,6 +21,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject middleLoseGo;
 
     [Space(10)]
+    [SerializeField] AudioSource middleWinSource;
+    [SerializeField] AudioSource middleLoseSource;
+
+    [Space(10)]
     [SerializeField] GameObject totalWinGo;
     [SerializeField] GameObject totalLoseGo;
 
@@ -99,12 +103,6 @@ public class GameManager : MonoBehaviour
 
                 p.UpdateCards();
             }
-
-            Vector3 diff = lookAtPoint.position - p.cardHand.position;
-            diff.Normalize();
-
-            float rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
-            p.cardHand.rotation = Quaternion.Euler(0f, 0f, rot_z - 90);
         }
     }
 
@@ -147,15 +145,20 @@ public class GameManager : MonoBehaviour
         GameObject second = players[1].cardPlace.GetChild(0).gameObject;
         GameObject third = players[2].cardPlace.GetChild(0).gameObject;
 
-        bool playerWin = Random.Range(0, 100) > 20;
+        bool playerWin = Random.Range(0, 100) > 70;
         GameObject targetGo = playerWin ? middleWinGo : middleLoseGo;
-        if(playerWin)
+        AudioSource targetSource = playerWin ? middleWinSource : middleLoseSource;
+
+        if(targetSource.isPlaying)
         {
-            for(int i = 0; i < 6; i++)
-            {
-                targetGo.SetActive( i % 2 == 0);
-                yield return new WaitForSeconds(0.15f);
-            }
+            targetSource.Stop();
+        }
+        targetSource.Play();
+
+        for (int i = 0; i < 6; i++)
+        {
+            targetGo.SetActive(i % 2 == 0);
+            yield return new WaitForSeconds(0.15f);
         }
 
         Destroy(first);
@@ -165,7 +168,7 @@ public class GameManager : MonoBehaviour
         if (players[0].cardHand.childCount == 0)
         {
             StopCoroutine(nameof(GameProcess));
-            bool totalWin = Random.Range(0, 100) > 1;
+            bool totalWin = Random.Range(0, 100) > 70;
             GameObject targetPopup = totalWin ? totalWinGo : totalLoseGo;
             
             targetPopup.SetActive(true);
