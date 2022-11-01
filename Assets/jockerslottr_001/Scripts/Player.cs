@@ -44,5 +44,6 @@ public class Player : MonoBehaviour
         card.Flip();
 
         card.transform.SetPositionAndRotation(cardPlace.position, cardPlace.rotation);
+        card.transform.SetParent(cardPlace);
     }
 }

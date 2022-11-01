@@ -23,12 +23,14 @@ public class Card : MonoBehaviour
     private void OnMouseDown()
     {
         Player refPlayer = GetComponentInParent<Player>();
-        if(refPlayer.isBot)
+        if(refPlayer.isBot || !GameManager.thirdPlayerStep)
         {
             return;
         }
 
         transform.SetPositionAndRotation(refPlayer.cardPlace.position, refPlayer.cardPlace.rotation);
+        transform.transform.SetParent(refPlayer.cardPlace);
+
         GameManager.thirdPlayerStep = false;
     }
 }

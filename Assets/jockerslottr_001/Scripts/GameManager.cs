@@ -42,9 +42,6 @@ public class GameManager : MonoBehaviour
 
         DealÑards();
 
-        player1Process = PlayerProcess(players[0]);
-        player2Process = PlayerProcess(players[1]);
-
         StartCoroutine(nameof(GameProcess));
     }
 
@@ -89,22 +86,44 @@ public class GameManager : MonoBehaviour
 
     IEnumerator PlayerProcess(Player player)
     {
+        yield return new WaitForSeconds(Random.Range(1, 3));
         player.ThrowCard();
-        yield return null;
     }
 
     IEnumerator GameProcess()
     {
         while(true)
         {
-            yield return StartCoroutine(player1Process);
-            yield return StartCoroutine(player2Process);
+            player1Process = PlayerProcess(players[0]);
+            player2Process = PlayerProcess(players[1]);
+
+            yield return player1Process;
+            yield return player2Process;
             thirdPlayerStep = true;
 
-            while(thirdPlayerStep)
+            while (thirdPlayerStep)
             {
                 yield return null;
             }
+
+            yield return StartCoroutine(nameof(CheckGameResult));
+            player1Process = PlayerProcess(players[0]);
+            player2Process = PlayerProcess(players[1]);
         }
+    }
+
+    IEnumerator CheckGameResult()
+    {
+        yield return new WaitForSeconds(1.25f);
+
+        GameObject first = players[0].cardPlace.GetChild(0).gameObject;
+        GameObject second = players[1].cardPlace.GetChild(0).gameObject;
+        GameObject third = players[2].cardPlace.GetChild(0).gameObject;
+
+        bool playerWin = Random.Range(0, 100) > 20;
+
+        Destroy(first.gameObject);
+        Destroy(second.gameObject);
+        Destroy(third.gameObject);
     }
 }
