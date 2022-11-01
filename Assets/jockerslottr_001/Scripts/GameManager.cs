@@ -13,9 +13,12 @@ public class GameManager : MonoBehaviour
     IEnumerator player1Process;
     IEnumerator player2Process;
 
-
     [SerializeField] CardDeckData cardDeckData;
     [SerializeField] Transform lookAtPoint;
+
+    [Space(10)]
+    [SerializeField] GameObject middleWinGo;
+    [SerializeField] GameObject middleLoseGo;
 
     [Space(10)]
     [SerializeField] Image firstInDeck;
@@ -94,6 +97,9 @@ public class GameManager : MonoBehaviour
     {
         while(true)
         {
+            middleWinGo.SetActive(false);
+            middleLoseGo.SetActive(false);
+
             player1Process = PlayerProcess(players[0]);
             player2Process = PlayerProcess(players[1]);
 
@@ -120,10 +126,19 @@ public class GameManager : MonoBehaviour
         GameObject second = players[1].cardPlace.GetChild(0).gameObject;
         GameObject third = players[2].cardPlace.GetChild(0).gameObject;
 
-        bool playerWin = Random.Range(0, 100) > 20;
+        bool playerWin = Random.Range(0, 100) > 1;
+        GameObject targetGo = playerWin ? middleWinGo : middleLoseGo;
+        if(playerWin)
+        {
+            for(int i = 0; i < 6; i++)
+            {
+                targetGo.SetActive( i % 2 == 0);
+                yield return new WaitForSeconds(0.25f);
+            }
+        }
 
-        Destroy(first.gameObject);
-        Destroy(second.gameObject);
-        Destroy(third.gameObject);
+        Destroy(first);
+        Destroy(second);
+        Destroy(third);
     }
 }
