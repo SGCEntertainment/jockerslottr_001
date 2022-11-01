@@ -3,10 +3,21 @@ using UnityEngine.UI;
 
 public class Card : MonoBehaviour
 {
-    public Sprite Icon
+    private Sprite GetIcon()
     {
-        get => GetComponent<Image>().sprite;
-        set => GetComponent<Image>().sprite = value;
+        return GetComponent<Image>().sprite;
+    }
+
+    private void SetIcon(Sprite value)
+    {
+        GetComponent<Image>().sprite = value;
+    }
+
+    public Sprite faceSprite;
+
+    public void Flip()
+    {
+        SetIcon(faceSprite);
     }
 
     private void OnMouseDown()
@@ -18,5 +29,6 @@ public class Card : MonoBehaviour
         }
 
         transform.SetPositionAndRotation(refPlayer.cardPlace.position, refPlayer.cardPlace.rotation);
+        GameManager.thirdPlayerStep = false;
     }
 }

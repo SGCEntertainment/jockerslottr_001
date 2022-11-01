@@ -1,19 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     const int maxCards = 8;
 
+    public static bool thirdPlayerStep;
 
     IEnumerator player1Process;
     IEnumerator player2Process;
-    IEnumerator player3Process;
 
 
     [SerializeField] CardDeckData cardDeckData;
     [SerializeField] Transform lookAtPoint;
+
+    [Space(10)]
+    [SerializeField] Image firstInDeck;
 
     [Space(10)]
     [SerializeField] Player[] players;
@@ -21,28 +26,57 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        player1Process = GameProcess(players[0]);
-        player2Process = GameProcess(players[1]);
-        player3Process = GameProcess(players[2]);
-
-        StartCoroutine(player1Process);
-        StartCoroutine(player2Process);
-        StartCoroutine(player3Process);
-
-        StartCoroutine(nameof(DealÑards));
+        StartGame();
     }
 
-    IEnumerator DealÑards()
+    public void StartGame()
     {
-        float timeOffset = 0.01f;
+        thirdPlayerStep = false;
+
+        cardsInDeck = cardDeckData.cardSprites.ToList();
+        SuffleCards();
+
+        Sprite firstCard = cardsInDeck.First();
+        cardsInDeck.Remove(firstCard);
+        firstInDeck.sprite = firstCard;
+
+        DealÑards();
+
+        player1Process = PlayerProcess(players[0]);
+        player2Process = PlayerProcess(players[1]);
+
+        StartCoroutine(nameof(GameProcess));
+    }
+
+    void SuffleCards()
+    {
+        for(int i = 0; i < cardsInDeck.Count; i++)
+        {
+            Sprite tmp = cardsInDeck[i];
+            int rv = Random.Range(i, cardsInDeck.Count);
+            cardsInDeck[i] = cardsInDeck[rv];
+            cardsInDeck[rv] = tmp;
+        }
+    }
+
+    void DealÑards()
+    {
         foreach (Player p in players)
         {
             for(int i = 0; i < maxCards; i++)
             {
-                Instantiate(cardDeckData.cardPrefab, p.cardHand.position, Quaternion.identity,  p.cardHand);
-                p.UpdateCards();
+                Card card = Instantiate(cardDeckData.cardPrefab, p.cardHand.position, Quaternion.identity, p.cardHand);
 
-                yield return new WaitForSeconds(timeOffset);
+                Sprite _cardFace = cardsInDeck.Last();
+                cardsInDeck.Remove(_cardFace);
+
+                card.faceSprite = _cardFace;
+                if (!p.isBot)
+                {
+                    card.Flip();
+                }
+
+                p.UpdateCards();
             }
 
             Vector3 diff = lookAtPoint.position - p.cardHand.position;
@@ -53,9 +87,24 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    IEnumerator GameProcess(Player player)
+    IEnumerator PlayerProcess(Player player)
     {
-        Debug.Log(player.name);
+        player.ThrowCard();
         yield return null;
+    }
+
+    IEnumerator GameProcess()
+    {
+        while(true)
+        {
+            yield return StartCoroutine(player1Process);
+            yield return StartCoroutine(player2Process);
+            thirdPlayerStep = true;
+
+            while(thirdPlayerStep)
+            {
+                yield return null;
+            }
+        }
     }
 }

@@ -37,4 +37,12 @@ public class Player : MonoBehaviour
         pos.z = center.z;
         return pos;
     }
+
+    public void ThrowCard()
+    {
+        Card card = cardHand.GetChild(Random.Range(0, cardHand.childCount)).GetComponent<Card>();
+        card.Flip();
+
+        card.transform.SetPositionAndRotation(cardPlace.position, cardPlace.rotation);
+    }
 }
