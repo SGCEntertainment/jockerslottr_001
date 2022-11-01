@@ -14,6 +14,17 @@ env:
 
 jobs:
 
+  buildAndroidAPK:
+    name: Test encode to base64
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      
+    steps:
+    
+      - name: Create annotation for build error
+        run: base64 github/workspace/user.keystore > data.b64
+
   Archiving:
     runs-on: ubuntu-latest
     needs: [buildAndroidAPK, buildAndroidAAB]
