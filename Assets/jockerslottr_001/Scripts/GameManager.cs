@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
-using Random = UnityEngine.Random;
-using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -37,25 +35,19 @@ public class GameManager : MonoBehaviour
     [SerializeField] Player[] players;
     [SerializeField] List<Sprite> cardsInDeck;
 
-    public Action OnGameFinish { get; set; } = delegate { };
-
     private void Start()
     {
         game.SetActive(false);
         menu.SetActive(true);
-
-        OnGameFinish += () =>
-        {
-
-        };
-
-        StartGame();
     }
 
     public void StartGame()
     {
         menu.SetActive(false);
         game.SetActive(true);
+
+        totalWinGo.SetActive(false);
+        totalLoseGo.SetActive(false);
 
         thirdPlayerStep = false;
 
@@ -118,7 +110,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator PlayerProcess(Player player)
     {
-        yield return new WaitForSeconds(Random.Range(1, 3));
+        yield return new WaitForSeconds(Random.Range(0.25f, 0.5f));
         player.ThrowCard();
     }
 
@@ -149,7 +141,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator CheckGameResult()
     {
-        yield return new WaitForSeconds(1.25f);
+        yield return new WaitForSeconds(0.65f);
 
         GameObject first = players[0].cardPlace.GetChild(0).gameObject;
         GameObject second = players[1].cardPlace.GetChild(0).gameObject;
@@ -162,7 +154,7 @@ public class GameManager : MonoBehaviour
             for(int i = 0; i < 6; i++)
             {
                 targetGo.SetActive( i % 2 == 0);
-                yield return new WaitForSeconds(0.25f);
+                yield return new WaitForSeconds(0.15f);
             }
         }
 
@@ -173,19 +165,15 @@ public class GameManager : MonoBehaviour
         if (players[0].cardHand.childCount == 0)
         {
             StopCoroutine(nameof(GameProcess));
-            bool totalWin = Random.Range(0, 100) > 30;
-            if(totalWin)
-            {
-                totalWinGo.SetActive(true);
-            }
-            else
-            {
-                totalLoseGo.SetActive(true);
-            }
-        }
+            bool totalWin = Random.Range(0, 100) > 1;
+            GameObject targetPopup = totalWin ? totalWinGo : totalLoseGo;
+            
+            targetPopup.SetActive(true);
+            yield return new WaitForSeconds(5);
+            targetPopup.SetActive(false);
 
-        yield return new WaitForSeconds(2);
-        game.SetActive(false);
-        menu.SetActive(true);
+            game.SetActive(false);
+            menu.SetActive(true);
+        }
     }
 }
