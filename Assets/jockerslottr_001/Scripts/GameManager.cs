@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -21,19 +23,40 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject middleLoseGo;
 
     [Space(10)]
+    [SerializeField] GameObject totalWinGo;
+    [SerializeField] GameObject totalLoseGo;
+
+    [Space(10)]
+    [SerializeField] GameObject menu;
+    [SerializeField] GameObject game;
+
+    [Space(10)]
     [SerializeField] Image firstInDeck;
 
     [Space(10)]
     [SerializeField] Player[] players;
     [SerializeField] List<Sprite> cardsInDeck;
 
+    public Action OnGameFinish { get; set; } = delegate { };
+
     private void Start()
     {
+        game.SetActive(false);
+        menu.SetActive(true);
+
+        OnGameFinish += () =>
+        {
+
+        };
+
         StartGame();
     }
 
     public void StartGame()
     {
+        menu.SetActive(false);
+        game.SetActive(true);
+
         thirdPlayerStep = false;
 
         cardsInDeck = cardDeckData.cardSprites.ToList();
@@ -46,6 +69,12 @@ public class GameManager : MonoBehaviour
         DealÑards();
 
         StartCoroutine(nameof(GameProcess));
+    }
+
+    public void Back()
+    {
+        game.SetActive(false);
+        menu.SetActive(true);
     }
 
     void SuffleCards()
@@ -126,7 +155,7 @@ public class GameManager : MonoBehaviour
         GameObject second = players[1].cardPlace.GetChild(0).gameObject;
         GameObject third = players[2].cardPlace.GetChild(0).gameObject;
 
-        bool playerWin = Random.Range(0, 100) > 1;
+        bool playerWin = Random.Range(0, 100) > 20;
         GameObject targetGo = playerWin ? middleWinGo : middleLoseGo;
         if(playerWin)
         {
@@ -140,5 +169,23 @@ public class GameManager : MonoBehaviour
         Destroy(first);
         Destroy(second);
         Destroy(third);
+
+        if (players[0].cardHand.childCount == 0)
+        {
+            StopCoroutine(nameof(GameProcess));
+            bool totalWin = Random.Range(0, 100) > 30;
+            if(totalWin)
+            {
+                totalWinGo.SetActive(true);
+            }
+            else
+            {
+                totalLoseGo.SetActive(true);
+            }
+        }
+
+        yield return new WaitForSeconds(2);
+        game.SetActive(false);
+        menu.SetActive(true);
     }
 }
