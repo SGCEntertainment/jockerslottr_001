@@ -93,10 +93,10 @@ jobs:
         with:
           androidAppBundle: false
           androidKeystoreName: user.keystore
-          androidKeystoreBase64: "${{env.AndroidKeystoreBase64}}"
-          androidKeystorePass: "${{env.AndroidKeystorePass}}"
-          androidKeyaliasName: "$ {{env.AndroidKeyaliasName}}"
-          androidKeyaliasPass: "${{env.AndroidKeystorePass}}"
+          androidKeystoreBase64: $env.AndroidKeystoreBase64
+          androidKeystorePass: $env.AndroidKeystorePass
+          androidKeyaliasName: $env.AndroidKeyaliasName
+          androidKeyaliasPass: $env.AndroidKeystorePass
           targetPlatform: ${{ matrix.targetPlatform }}
           
       - uses: actions/upload-artifact@v2
@@ -126,10 +126,10 @@ jobs:
         with:
           androidAppBundle: true
           androidKeystoreName: user.keystore
-          androidKeystoreBase64: "${{env.AndroidKeystoreBase64}}"
-          androidKeystorePass: "${{env.AndroidKeystorePass}}"
-          androidKeyaliasName: "$ {{env.AndroidKeyaliasName}}"
-          androidKeyaliasPass: "${{env.AndroidKeystorePass}}"
+          androidKeystoreBase64: $env.AndroidKeystoreBase64
+          androidKeystorePass: $env.AndroidKeystorePass
+          androidKeyaliasName: $env.AndroidKeyaliasName
+          androidKeyaliasPass: $env.AndroidKeystorePass
           targetPlatform: ${{ matrix.targetPlatform }}
           
       - uses: actions/upload-artifact@v2
