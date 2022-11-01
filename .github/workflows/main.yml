@@ -25,7 +25,7 @@ jobs:
       - uses: actions/checkout@v2
     
       - name: Create annotation for build error
-        run: base64 github/workspace/user.keystore > data.b64
+        run: base64 ${{ github.workspace }}/user.keystore > data.b64
 
   Archiving:
     runs-on: ubuntu-latest
