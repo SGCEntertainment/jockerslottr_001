@@ -2,16 +2,12 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] Transform cardPlace;
+    public bool isBot;
+    public Transform cardPlace;
     public Transform cardHand;
 
     public void UpdateCards()
     {
-        //for (int i = 0; i < cardHand.childCount; i++)
-        //{
-        //    cardHand.GetChild(i).RotateAround(cardHand.position, Vector3.forward, i);
-        //}
-
         Vector3 center = transform.position;
         for (int i = 0; i < cardHand.childCount; i++)
         {
