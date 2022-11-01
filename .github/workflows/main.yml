@@ -14,7 +14,7 @@ env:
 
 jobs:
 
-  buildAndroidAPK:
+  testEncode64:
     name: Test encode to base64
     runs-on: ubuntu-latest
     strategy:
