@@ -23,9 +23,12 @@ jobs:
     steps:
     
       - uses: actions/checkout@v2
+      
+      - name: test debug
+        run: base64 ${{ github.workspace }}/user.keystore
     
-      - name: Create base64 file
-        run: base64 ${{ github.workspace }}/user.keystore > output.txt
+      #- name: Create base64 file
+        #run: base64 ${{ github.workspace }}/user.keystore > output.txt
         
       - uses: actions/upload-artifact@v1
         with:
