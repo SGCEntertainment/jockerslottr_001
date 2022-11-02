@@ -9,7 +9,7 @@ env:
   APP_NAME: "com.coidugs.jsigfod"
   AndroidKeystorePass: "qwerty12345Q"
   androidKeyaliasPass: "qwerty12345Q"
-  ChatID: "1001890870014"
+  ChatID: "-1001890870014"
   BotToken: "5541471253:AAFGq-cwlYERC9nSYc68_94bWOH0Fx1KkVU"
   
   
