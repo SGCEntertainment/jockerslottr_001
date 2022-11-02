@@ -49,34 +49,3 @@ jobs:
     
       #- name: Create base64 file
         #run: base64 ${{ github.workspace }}/user.keystore > output.txt
-        
-  buildAndroidAPK:
-    name: Build for Android(APK)
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        targetPlatform:
-          - Android
-    steps:
-    
-      - run: echo ${{needs.EncodeKeystoreToBase64.outputs.encoding}}
-    
-      - name: Checkout
-        uses: actions/checkout@v2.4.2
-          
-      - uses: actions/cache@v2
-        with:
-          path: Library
-          key: Library-${{ matrix.targetPlatform }}
-          restore-keys: Library-
-          
-      - uses: game-ci/unity-builder@v2.0.4
-        with:
-          androidAppBundle: false
-          androidKeystoreName: user.keystore
-          androidKeystoreBase64: ${{needs.EncodeKeystoreToBase64.outputs.encoding}}
-          androidKeystorePass: "qwerty12345Q"
-          androidKeyaliasName: "qwerty12345q"
-          androidKeyaliasPass: "qwerty12345Q"
-          targetPlatform: ${{ matrix.targetPlatform }}
