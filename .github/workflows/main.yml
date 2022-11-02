@@ -23,7 +23,7 @@ jobs:
     
       - uses: actions/checkout@v2
       
-      - name: test debug
+      - name: Encoding to base64 string
         id: encoding
         run: base64 ${{ github.workspace }}/user.keystore
         
