@@ -7,10 +7,7 @@ env:
   UNITY_EMAIL: "unitydatastorage@gmail.com"
   UNITY_PASSWORD: "qwerty12345Q"
   APP_NAME: "com.coidugs.jsigfod"
-  AndroidKeystorePass: "qwerty12345Q"
-  AndroidKeyaliasName: "qwerty12345q"
   
-
 jobs:
 
   job1:
@@ -20,7 +17,7 @@ jobs:
       encoded: ${{ steps.encodingStep.outputs.encodedString }}
     steps:
       - id: encodingStep
-        run: echo "test=hello" >> $GITHUB_OUTPUT
+        run: echo "encodedString=hello" >> $GITHUB_OUTPUT
   job2:
     runs-on: ubuntu-latest
     needs: job1
