@@ -29,6 +29,22 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void ResetHand()
+    {
+        foreach(Transform t in cardHand)
+        {
+            Destroy(t.gameObject);
+        }
+
+        foreach (Transform t in cardPlace)
+        {
+            Destroy(t.gameObject);
+        }
+
+        cardHand.DetachChildren();
+        cardPlace.DetachChildren();
+    }
+
     Vector3 RandomCircle(Vector3 center, float radius, float angle)
     {
         Vector3 pos;

@@ -69,6 +69,7 @@ public class GameManager : MonoBehaviour
 
     public void Back()
     {
+        StopCoroutine(nameof(GameProcess));
         game.SetActive(false);
         menu.SetActive(true);
     }
@@ -88,6 +89,7 @@ public class GameManager : MonoBehaviour
     {
         foreach (Player p in players)
         {
+            p.ResetHand();
             for(int i = 0; i < maxCards; i++)
             {
                 Card card = Instantiate(cardDeckData.cardPrefab, p.cardHand.position, Quaternion.identity, p.cardHand);
