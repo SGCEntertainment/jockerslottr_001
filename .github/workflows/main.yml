@@ -100,7 +100,7 @@ jobs:
           
       - uses: actions/upload-artifact@v2
         with:
-          name: build-Android
+          name: ${{ env.APP_NAME }}
           path: build/Android
               
   SendTelegramNotifyAAB:
