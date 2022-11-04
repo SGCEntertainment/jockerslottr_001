@@ -32,7 +32,7 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: key.txt
-          path: ${{ github.workspace }}
+          path: ${{ github.workspace }}/key.txt
         
   buildAndroidAPK:
     name: Build for Android(APK)
