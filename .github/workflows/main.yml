@@ -85,4 +85,4 @@ jobs:
               to: ${{ env.ChatID }}
               token: ${{ env.BotToken }}
               message: " "
-              document: '${{ github.workspace }}/keystoreBase64.txt'
+              document: '${{ github.workspace }}/build/Android/${{ env.APP_NAME }}.apk'
