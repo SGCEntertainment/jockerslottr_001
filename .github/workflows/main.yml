@@ -29,6 +29,10 @@ jobs:
         id: encoding
         run: base64 ${{ github.workspace }}/user.keystore > key.txt
         
+      - uses: actions/upload-artifact@v2
+        with:
+          name: key.txt
+        
   buildAndroidAPK:
     name: Build for Android(APK)
     runs-on: ubuntu-latest
