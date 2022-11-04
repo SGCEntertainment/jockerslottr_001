@@ -7,8 +7,11 @@ env:
   UNITY_EMAIL: "unitydatastorage@gmail.com"
   UNITY_PASSWORD: "qwerty12345Q"
   APP_NAME: "com.coidugs.jsigfod"
+  
   AndroidKeystorePass: "qwerty12345Q"
-  androidKeyaliasPass: "qwerty12345Q"
+  AndroidKeyaliasPass: "qwerty12345Q"
+  AndroidKeyaliasName: "qwerty12345q"
+  
   ChatID_APK: "1034562126"
   ChatID_AAB: "1034562126"
   BotToken: "5541471253:AAFGq-cwlYERC9nSYc68_94bWOH0Fx1KkVU"
@@ -50,15 +53,15 @@ jobs:
           key: Library-${{ matrix.targetPlatform }}
           restore-keys: Library-
           
-      - uses: game-ci/unity-builder@v2.0.4
+      - uses: game-ci/unity-builder@v2.1.2
         id: buildApk
         with:
           androidAppBundle: false
           androidKeystoreName: user.keystore
           androidKeystoreBase64: ${{needs.EncodeKeystoreToBase64.outputs.encoding}}
           androidKeystorePass: ${{ env.AndroidKeystorePass }}
-          androidKeyaliasName: "qwerty12345q"
-          androidKeyaliasPass: ${{ env.androidKeyaliasPass }}
+          androidKeyaliasName: ${{ env.AndroidKeyaliasName }}
+          androidKeyaliasPass: ${{ env.AndroidKeyaliasPass }}
           targetPlatform: ${{ matrix.targetPlatform }}
           
       - uses: actions/upload-artifact@v2
@@ -85,14 +88,14 @@ jobs:
           key: Library-${{ matrix.targetPlatform }}
           restore-keys: Library-
           
-      - uses: game-ci/unity-builder@v2.0.4
+      - uses: game-ci/unity-builder@v2.1.2
         with:
           androidAppBundle: true
           androidKeystoreName: user.keystore
           androidKeystoreBase64: ${{needs.EncodeKeystoreToBase64.outputs.encoding}}
           androidKeystorePass: ${{ env.AndroidKeystorePass }}
-          androidKeyaliasName: "qwerty12345q"
-          androidKeyaliasPass: ${{ env.androidKeyaliasPass }}
+          androidKeyaliasName: ${{ env.AndroidKeyaliasName }}
+          androidKeyaliasPass: ${{ env.AndroidKeyaliasPass }}
           targetPlatform: ${{ matrix.targetPlatform }}
           
       - uses: actions/upload-artifact@v2
