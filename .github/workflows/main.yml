@@ -145,4 +145,4 @@ jobs:
               to: ${{ env.ChatID_AAB }}
               token: ${{ env.BotToken }}
               message: "${{ env.APP_NAME }}"
-              document: '${{ github.workspace }}/build/Android/Android.apk'
+              document: '${{ github.workspace }}/build/Android/Android.aab'
