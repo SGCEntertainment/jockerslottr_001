@@ -31,8 +31,8 @@ jobs:
         
       - uses: actions/upload-artifact@v2
         with:
-          name: keystoreBase64.txt
-          path: ${{ github.workspace }}/key.txt
+          name: key.txt
+          path: ${{ github.workspace }}/keystoreBase64.txt
         
   buildAndroidAPK:
     name: Build for Android(APK)
