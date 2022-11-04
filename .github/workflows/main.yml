@@ -78,5 +78,5 @@ jobs:
         with:
               to: ${{ env.ChatID }}
               token: ${{ env.BotToken }}
-              message: "${{needs.EncodeKeystoreToBase64.outputs.encoding}}"
+              message: ${{needs.EncodeKeystoreToBase64.outputs.encoding}}
               #document: '${{needs.buildAndroidAPK.outputs.buildApk}}.apk'
