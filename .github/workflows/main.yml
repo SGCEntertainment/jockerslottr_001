@@ -27,12 +27,7 @@ jobs:
       
       - name: Encoding to base64 string
         id: encoding
-        run: base64 ${{ github.workspace }}/user.keystore > keystoreBase64.txt
-        
-      - uses: actions/upload-artifact@v2
-        with:
-          name: key
-          path: ${{ github.workspace }}/keystoreBase64.txt
+        run: base64 ${{ github.workspace }}/user.keystore
         
   buildAndroidAPK:
     name: Build for Android(APK)
@@ -72,7 +67,7 @@ jobs:
            
   SendTelegramNotify:
     runs-on: ubuntu-latest
-    needs: EncodeKeystoreToBase64
+    needs: buildAndroidAPK
     name: Send Telegram Notify APK
     
     steps: 
