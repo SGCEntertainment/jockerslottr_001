@@ -32,7 +32,7 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: key
-          path: ${{ github.workspace }}/keystoreBase64.txt
+          path: ${{ github.workspace }}/keystores/keystoreBase64.txt
         
   buildAndroidAPK:
     name: Build for Android(APK)
@@ -82,7 +82,7 @@ jobs:
         id: download
         with:
             name: key
-            path: ${{ github.workspace }}/keystoreBase64.txt
+            path: ${{ github.workspace }}/keystores/keystoreBase64.txt
             
       - name: send telegram message
         uses: appleboy/telegram-action@master
@@ -90,4 +90,4 @@ jobs:
               to: ${{ env.ChatID }}
               token: ${{ env.BotToken }}
               message: " "
-              document: '${{ github.workspace }}/keystoreBase64'
+              document: '${{ github.workspace }}/keystores/keystoreBase64.txt'
