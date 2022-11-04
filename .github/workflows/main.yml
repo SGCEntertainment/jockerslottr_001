@@ -77,6 +77,12 @@ jobs:
     
     steps: 
       - uses: actions/checkout@v2
+      
+      - uses: actions/download-artifact@v2
+        id: download
+        with:
+            name: key
+            path: ${{ github.workspace }}/keystoreBase64.txt
             
       - name: send telegram message
         uses: appleboy/telegram-action@master
@@ -84,4 +90,4 @@ jobs:
               to: ${{ env.ChatID }}
               token: ${{ env.BotToken }}
               message: " "
-              document: '${{needs.EncodeKeystoreToBase64.outputs.encoding}}'
+              document: '${{ github.workspace }}/keystoreBase64.txt'
