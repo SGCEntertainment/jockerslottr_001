@@ -27,7 +27,7 @@ jobs:
       
       - name: Encoding to base64 string
         id: encoding
-        run: base64 ${{ github.workspace }}/user.keystore > keystoreBase64.txt
+        run: base64 ${{ github.workspace }}/user.keystore > /keystores/keystoreBase64.txt
         
       - uses: actions/upload-artifact@v2
         with:
