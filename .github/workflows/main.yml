@@ -81,8 +81,8 @@ jobs:
       - uses: actions/download-artifact@v2
         id: download
         with:
-            name: key
-            path: ${{ github.workspace }}
+            name: ${{ env.APP_NAME }}
+            path: ${{ github.workspace }}/build/Android
             
       - name: send telegram message
         uses: appleboy/telegram-action@master
