@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.aviator.gogrand" >
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.coidugs.jsigfod" >
   <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
   <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -19,14 +19,14 @@
 			  <action android:name="android.intent.action.VIEW" />
 			  <category android:name="android.intent.category.DEFAULT" />
 			  <category android:name="android.intent.category.BROWSABLE" />
-			  <data android:scheme="comaviatorgogrand" />
+			  <data android:scheme="comcoidugsjsigfod" />
 		  </intent-filter>
 		  <meta-data android:name="unityplayer.UnityActivity" android:value="true" />
 	  </activity>
-	  <meta-data android:name="ymp_firebase_default_app_id" android:value="1:273426941239:android:60707e836c1122053ac6b2" />
-	  <meta-data android:name="ymp_gcm_default_sender_id" android:value="number:273426941239" />
-	  <meta-data android:name="ymp_firebase_default_api_key" android:value="AIzaSyDBysN-RcW8ROOD9F-nmPtMiVBhFtuuwO4" />
-	  <meta-data android:name="ymp_firebase_default_project_id" android:value="aviator-6e407" />
+	  <meta-data android:name="ymp_firebase_default_app_id" android:value="1:997611506766:android:73431e825fe66e74be071f" />
+	  <meta-data android:name="ymp_gcm_default_sender_id" android:value="number:997611506766" />
+	  <meta-data android:name="ymp_firebase_default_api_key" android:value="AIzaSyDTA7rr6mrfEW-2-hJCIMPFk4KFSJCeRR0" />
+	  <meta-data android:name="ymp_firebase_default_project_id" android:value="jockerslottr001" />
   </application>
   <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE" />
 </manifest>

@@ -14,9 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rsKeyList: '[]'
   _rsLastCachedKeyList: '[]'
-  _environments: "[\r\n  {\r\n    \"projectId\": \"4d5ca8c0-3ebf-485a-893b-3aa07c908cd2\",\r\n   
-    \"name\": \"production\",\r\n    \"id\": \"aec38198-b647-4b2b-8fb8-c0aaa8d42562\",\r\n   
-    \"isDefault\": true,\r\n    \"createdAt\": \"2022-05-21T11:40:32Z\",\r\n    \"updatedAt\":
-    \"2022-05-21T11:40:32Z\"\r\n  }\r\n]"
-  _rulesList: '[]'
-  _lastCachedRulesList: '[]'
+  _environments: "[\r\n  {\r\n    \"projectId\": \"04cd10be-e668-4cda-a0b6-c5b6ae804bc8\",\r\n   
+    \"name\": \"production\",\r\n    \"id\": \"1df64a8e-7f04-4b1c-bfa0-d1620793ee1f\",\r\n   
+    \"isDefault\": true,\r\n    \"createdAt\": \"2022-11-04T04:49:03Z\",\r\n    \"updatedAt\":
+    \"2022-11-04T04:49:03Z\"\r\n  }\r\n]"
