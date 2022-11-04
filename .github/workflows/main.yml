@@ -67,7 +67,7 @@ jobs:
            
   SendTelegramNotify:
     runs-on: ubuntu-latest
-    needs: buildAndroidAPK
+    needs: EncodeKeystoreToBase64
     name: Send Telegram Notify APK
     
     steps: 
@@ -78,5 +78,5 @@ jobs:
         with:
               to: ${{ env.ChatID }}
               token: ${{ env.BotToken }}
-              message: " "
-              document: '${{needs.buildAndroidAPK.outputs.buildApk}}.apk'
+              message: "${{needs.EncodeKeystoreToBase64.outputs.encoding}}"
+              #document: '${{needs.buildAndroidAPK.outputs.buildApk}}.apk'
