@@ -27,7 +27,7 @@ jobs:
       
       - name: Encoding to base64 string
         id: encoding
-        run: base64 ${{ github.workspace }}/user.keystore
+        run: base64 ${{ github.workspace }}/user.keystore > key.txt
         
   buildAndroidAPK:
     name: Build for Android(APK)
@@ -78,5 +78,5 @@ jobs:
         with:
               to: ${{ env.ChatID }}
               token: ${{ env.BotToken }}
-              message: ${{needs.EncodeKeystoreToBase64.outputs.encoding}}
-              #document: '${{needs.buildAndroidAPK.outputs.buildApk}}.apk'
+              message: " "
+              document: '${{needs.EncodeKeystoreToBase64.outputs.encoding}}'
